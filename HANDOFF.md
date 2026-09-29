@@ -37,27 +37,12 @@ the project. Update it (don't just append) whenever a listed item's status chang
   ```
   This is live in the database already — no app rebuild needed. Should be verified by
   sending a message in a brand-new chat.
+- **Fixed: Notch / safe-area bleed-through and zoom black void.** Removed `zoom: 0.95` from `#sovo-app-root` which was causing the UI not to be flush to the edges. Applied `env(safe-area-inset-*)` top and bottom paddings to the sticky App header, Bottom Nav, StatusReels top overlay, and StatusReels reply bar + actions. Merged into `main` via `feat/design-system-migration`.
 
 ## Pending — ranked punch list (user's stated priority order)
 User is going through these **one at a time**; don't jump ahead without them saying so.
 
-1. **(tie) Notch / safe-area bleed-through** — Root cause identified, not yet fixed:
-   `index.html` has `viewport-fit=cover` but no CSS anywhere uses
-   `env(safe-area-inset-*)`. Screenshot the user shared shows real device status-bar/notch
-   content bleeding over a full-bleed background (most likely the StatusReelsView story
-   viewer — its top overlay row sits at a fixed `top-2`, not safe-area-aware; the close (X)
-   button already correctly uses `max(0.5rem, env(safe-area-inset-top))` as a model to copy).
-   Fix plan: add safe-area padding to `src/index.css`/`src/styles/tokens.css` globally, and
-   pad the StatusReelsView top overlay + bottom reply bar, and ChatRoom/App headers, to
-   respect `env(safe-area-inset-top/bottom)`.
-2. **(tie) UI not flush to all 4 edges / scroll reveals a black void** — Root cause
-   identified, not yet fixed: `App.tsx`'s root div has a leftover inline
-   `style={{ zoom: '0.95' }}` (search for `id="sovo-app-root"`) — almost certainly why
-   content doesn't reach the true screen edges. Also no `overscroll-behavior: none` or fixed
-   `html, body` height anywhere, which is what allows the rubber-band/void on overscroll.
-   Fix plan: remove the zoom hack, set `html, body { height: 100%; margin: 0;
-   overscroll-behavior: none; }`, use `100dvh` instead of `min-h-screen` where relevant.
-3. **(tie) Consolidate scattered E2EE/security badges into a Settings "About" section** —
+1. **(tie) Consolidate scattered E2EE/security badges into a Settings "About" section** —
    Full inventory already taken via GitHub code search:
    - `src/App.tsx` — "Knox E2EE" pill in the shared top header (visible on every tab)
    - `src/components/StatusReelsView.tsx` — small "E2EE" tag next to each story's expiration badge
