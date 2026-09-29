@@ -10,3 +10,4 @@ Add one row per event. Never edit or delete existing rows. See Rule 0 in README.
 | 2026-09-29 08:32 | AG{UnderAge} | CHECKIN | S'OVO-CHAT-REPO | Picking up Chatting-Sovo app; reading HANDOFF.md — will address notch/safe-area + zoom bleed issues |
 | 2026-09-29 08:41 | AG{UnderAge} | CHECKOUT | S'OVO-CHAT-REPO | Fixed both tie-1 items: removed zoom:0.95 from #sovo-app-root; added env(safe-area-inset-*) to header, bottom nav, StatusReelsView overlay + reply bar. Pushed to feat/design-system-migration branch. PR needed: https://github.com/Thoriii-Gloriii/Chatting-Sovo/pull/new/feat/design-system-migration |
 | 2026-09-29 09:14 | MT THE CODER | CHECKIN | fileflow-ai | Applying uploaded logo as app icon and in-app logo (branch ui-logo-and-icon in fileflow-ai repo) |
+| 2026-09-29 09:15 | MT THE CODER | CHECKOUT | fileflow-ai | Logo/icon PR #1 open in fileflow-ai; next: theme + nav shell |
